@@ -4,6 +4,7 @@ const { log } = require("console");
 const app = express();
 app.use(express.json());
 const morgan = require("morgan");
+app.use(express.static("dist"));
 
 let services = [
   {
@@ -52,8 +53,7 @@ app.delete("/api/services/:id", (request, response) => {
 });
 
 const generateId = () => {
-  const randomId =
-    services.length > 0 ? Math.floor(Math.random() * 10000000) : 0;
+  const randomId = Math.floor(Math.random() * 10000000);
   return String(randomId);
 };
 
@@ -73,6 +73,16 @@ app.post("/api/services", (request, response) => {
   services = services.concat(service);
 
   response.status(201).json(service);
+});
+
+app.put("/api/services/:id", (request, response) => {
+  const id = request.params.id;
+  const body = request.body;
+
+  const serviceIndex = services.findIndex((s) => s.id === id);
+
+  services[serviceIndex] = { ...body, id: id };
+  response.status(200).json(services[serviceIndex]);
 });
 
 const PORT = 3001;

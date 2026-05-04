@@ -36,3 +36,6 @@ morgan.token("body", (request) => {
 
 app.use(morgan(":method :url :status :response-time ms :body"));
 ```
+
+- Luodaan ja automattisoidaan tuotanto frontendin varten :`npm install shx --save-dev`
+  `"build:ui": "shx rm -rf dist && cd ../frontend && npm run build && shx cp -r dist ../backend"`
