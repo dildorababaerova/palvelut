@@ -1,0 +1,17 @@
+GET http://localhost:3001/api/services
+
+
+###
+GET http://localhost:3001/api/services/3
+
+###
+DELETE http://localhost:3001/api/services/3
+
+###
+POST http://localhost:3001/api/services
+Content-Type: application/json
+
+{
+    "content": "TEST",
+    "important": true  
+}
